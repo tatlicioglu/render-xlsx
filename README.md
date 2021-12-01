@@ -2,4 +2,7 @@
 
 ## Usage
 
-python render.py \<input-file-name\>
+```
+pip install -r requirements.txt
+python render.py <input-file-name>
+```
