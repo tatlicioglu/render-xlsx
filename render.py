@@ -11,7 +11,7 @@ import matplotlib.dates
 import numpy as np
 
 if len(sys.argv) != 2:
-    raise Exception("Usage generate.py <input-file-name>")
+    raise Exception("Usage render.py <input-file-name>")
 
 input_file = sys.argv[1]
 
