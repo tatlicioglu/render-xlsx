@@ -56,18 +56,27 @@ dates = matplotlib.dates.date2num(x_values)
 
 fig = plt.figure()
 
-plt.subplots_adjust(left=0.15)
+plt.subplots_adjust(left=0.2, bottom=0.2)
 ax = fig.add_subplot()
 
-ax.plot_date(dates, y_values, linestyle='solid', linewidth=5, color='red')
+ax.plot_date(dates, y_values, linestyle='dashed', linewidth=2, color='red')
 
 plt.yticks(yvals)
 plt.gca().yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+
+start_drawing = False
+count = 0
 for value in y_values:
-    plt.axhline(y=value, linestyle='dashed', color='gray')
+    if count == 3:
+        break
+    if value == top:
+        start_drawing = True
+    if start_drawing:
+        plt.axhline(y=value, linestyle='dashed', color='gray')
+        count = count + 1
 
-
-plt.xlabel('Year', fontsize=12) 
+plt.xlabel('Years', fontsize=12) 
 plt.ylabel('Annual vested value', fontsize=12)
+
 
 fig.savefig('chart.png')
