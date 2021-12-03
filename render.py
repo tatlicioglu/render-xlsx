@@ -66,13 +66,16 @@ plt.gca().yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
 
 start_drawing = False
 count = 0
-for value in y_values:
+i = 0
+for i in range(len(y_values)):
     if count == 3:
         break
-    if value == top:
+    if y_values[i] == top:
         start_drawing = True
     if start_drawing:
-        plt.axhline(y=value, linestyle='dashed', color='gray')
+        plt.axhline(y=y_values[i], linestyle='dashed', color='gray')
+        plt.axvline(x=x_values[i], linestyle='dashed', color='gray')
+
         count = count + 1
 
 plt.xlabel('Years', fontsize=12) 
