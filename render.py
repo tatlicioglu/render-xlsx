@@ -3,7 +3,7 @@
 import pandas as pd
 import sys
 from os.path import exists
-from datetime import datetime
+from datetime import datetime, timedelta
 from transaction import Transaction
 from utils import Utils
 import matplotlib.pyplot as plt
@@ -36,12 +36,18 @@ for _, row in d_schedules.iterrows():
     vest_transaction = Utils.find_vest_transaction(vest_transactions, datetime.strptime(date, '%Y-%m-%d'))
     if (vest_transaction != None):
         price = vest_transaction.price
+    
     transaction = Transaction(date, amount, price)
     #print(transaction)
     transactions.append(transaction)
 
 
 transactions = sorted(transactions, key=lambda x: x.date)
+
+day_of_year = datetime.now().timetuple().tm_yday
+date_offset = timedelta(days=day_of_year + 1)
+for transaction in transactions:
+    transaction.date = transaction.date - date_offset
 
 annualities = Utils.get_annualities(transactions)
 
@@ -68,7 +74,7 @@ start_drawing = False
 count = 0
 i = 0
 for i in range(len(y_values)):
-    if count == 3:
+    if count == 5:
         break
     if y_values[i] == top:
         start_drawing = True
